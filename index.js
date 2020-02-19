@@ -7,7 +7,18 @@ client.once('ready', () => {
 })
 
 client.on('message', message => {
-    console.log(message.content);
+    if(message.member.hasPermission(["KICK_MEMBERS","BAN_MEMBERS"])) {
+
+        if(message.content.startsWith(`${prefix}kick`)) {
+    
+            let member = message.mentions.members.first();
+            member.kick().then((member) => {
+                message.channel.send("You gotta kicked by Jackie " + member.displayName)
+            })
+        }
+
+    }
+
 })
 
 client.login(token);
